@@ -32,8 +32,12 @@ class Field(
     // 取得に失敗した場合のデフォルトのマップ。
     private val defaultMap = R.drawable.map_3
 
+    private val maxColumnNum = Config.map2d.size
+    private val maxRowNum = Config.map2d[0].size
+
     init {
-        val mapId = Config.map2d[coordinateY][coordinateX]
+        // トーラス的に座標を繋げて、二次元平面で１周させる。
+        val mapId = Config.map2d[coordinateY % maxColumnNum][coordinateX % maxRowNum]
         drawableId = mapConvert[mapId] ?: defaultMap
     }
 }
